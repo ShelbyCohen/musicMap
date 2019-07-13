@@ -8,9 +8,9 @@ import javax.persistence.*
 class ToursEntity(
 
         @Id
-        @Column(name = "id")
+        @Column(name = "tourId")
         @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Int = 0,
+        val tourId: Int = 0,
 
         @Column(name = "artist")
         val artist: String = "",
@@ -27,14 +27,14 @@ class ToursEntity(
 
         @Column(name = "endDate")
         @Temporal(TemporalType.DATE)
-        val endDate: Date = Date(),
+        val endDate: Date = Date())
 
-        @OneToMany(
-                mappedBy = "tours",
-                targetEntity = BookingsEntity::class,
-                fetch = FetchType.LAZY,
-                cascade = [CascadeType.PERSIST]
-        )
-        private var bookings: Collection<BookingsEntity>? = null
-)
+//        @OneToMany(
+//                mappedBy = "tourForBooking",
+//                targetEntity = BookingsEntity::class,
+//                fetch = FetchType.LAZY,
+//                cascade = [CascadeType.PERSIST]
+//        )
+//        private val bookings: Collection<BookingsEntity>? = null
+
 

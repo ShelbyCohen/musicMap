@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface Bookings : JpaRepository<BookingsEntity, Int> {
 
-//    fun findByAuthId(authId: String) : BookingsEntity
+    fun findByAddress(address: String) : BookingsEntity
 
 }

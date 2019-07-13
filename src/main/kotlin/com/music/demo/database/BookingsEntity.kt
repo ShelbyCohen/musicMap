@@ -13,7 +13,6 @@ class BookingsEntity(
         val id: Int = 0,
 
         @Column(name = "tourId")
-        @GeneratedValue(strategy = GenerationType.AUTO)
         val tourId: Int = 0,
 
         @Column(name = "venue")
@@ -35,8 +34,15 @@ class BookingsEntity(
         @Temporal(TemporalType.DATE)
         val date: Date = Date(),
 
-        @ManyToOne(optional = false, cascade = [CascadeType.PERSIST])
-        @JoinColumn(name = "tourId", insertable = false, updatable = false)
-        private var tours: ToursEntity? = null
+        @ManyToOne(
+                optional = false,
+                cascade = [CascadeType.PERSIST]
+        )
+        @JoinColumn(
+                name = "tourId",
+                insertable = false,
+                updatable = false
+        )
+        private var tourForBooking: ToursEntity? = null
 )
 
