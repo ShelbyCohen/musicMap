@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface Tours : JpaRepository<ToursEntity, Int> {
 
-    fun findByAgent(authId: String) : ToursEntity
+    fun findByAgent(agent: String) : ToursEntity
 
 }

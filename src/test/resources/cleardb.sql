@@ -1,2 +1,4 @@
 
 DROP TABLE IF EXISTS `tours`;
+
+DROP TABLE IF EXISTS `bookings`;

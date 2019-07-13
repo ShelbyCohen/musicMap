@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `bookings` (
   `contactName` varchar(255) DEFAULT NULL,
   `contactNumber` varchar(255) DEFAULT NULL,
   `timeOnStage` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'TENTATIVE',
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FKbookings_tourId` FOREIGN KEY (`tourId`) REFERENCES `tours` (`tourId`)

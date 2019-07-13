@@ -1,5 +1,6 @@
 package com.music.demo.database
 
+import com.music.demo.models.BookingStatus
 import java.util.Date
 import javax.persistence.*
 
@@ -29,6 +30,10 @@ class BookingsEntity(
 
         @Column(name = "timeOnStage")
         val timeOnStage: String = "",
+
+        @Column(name = "status")
+        @Enumerated(EnumType.STRING)
+        val status: BookingStatus = BookingStatus.TENTATIVE,
 
         @Column(name = "date")
         @Temporal(TemporalType.DATE)
