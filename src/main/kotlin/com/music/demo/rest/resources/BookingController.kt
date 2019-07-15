@@ -14,6 +14,8 @@ class BookingController(@Autowired private val bookingService: BookingService) {
 
     @GetMapping("/book", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun addBooking(): String {
+        val booking = BookingsEntity()
+
         val newBooking = BookingsEntity(
                 tourId = 2,
                 venue = "testVenue",

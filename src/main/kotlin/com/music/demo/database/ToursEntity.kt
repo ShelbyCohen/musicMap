@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "tours")
-class ToursEntity(
+data class ToursEntity(
 
         @Id
         @Column(name = "tourId")
@@ -27,14 +27,15 @@ class ToursEntity(
 
         @Column(name = "endDate")
         @Temporal(TemporalType.DATE)
-        val endDate: Date = Date())
+        val endDate: Date = Date(),
 
-//        @OneToMany(
-//                mappedBy = "tourForBooking",
-//                targetEntity = BookingsEntity::class,
-//                fetch = FetchType.LAZY,
-//                cascade = [CascadeType.PERSIST]
-//        )
-//        private val bookings: Collection<BookingsEntity>? = null
+        @OneToMany(
+                mappedBy = "tourForBooking",
+                targetEntity = BookingsEntity::class,
+                fetch = FetchType.LAZY,
+                cascade = [CascadeType.PERSIST]
+        )
+        private val bookings: Collection<BookingsEntity>? = null
+)
 
 

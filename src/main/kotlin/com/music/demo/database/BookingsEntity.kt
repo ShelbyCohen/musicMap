@@ -10,8 +10,8 @@ class BookingsEntity(
 
         @Id
         @Column(name = "id")
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Int = 0,
+        @GeneratedValue(strategy = GenerationType.SEQUENCE)
+        var id: Int? = null,
 
         @Column(name = "tourId")
         val tourId: Int = 0,

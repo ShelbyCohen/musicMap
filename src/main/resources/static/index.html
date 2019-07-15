@@ -1,10 +1,198 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Book a tour here!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Music Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <!--Most current browsers will render content that is declared with this DOCTYPE
+    in "standards mode" which means that your application should be more cross-browser compliant.
+    The DOCTYPE is also designed to degrade gracefully; browsers that don't understand it will ignore it,
+    and use "quirks mode" to display their content.
+
+    Note that some CSS that works within quirks mode is not valid in standards mode.
+    In specific, all percentage-based sizes must inherit from parent block elements,
+    and if any of those ancestors fail to specify a size, they are assumed to be sized at 0 x 0 pixels.
+    For that reason, we include the following <style> declaration:-->
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 80%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 80%;
+            margin: 0;
+            padding: 0;
+        }
+        #legend {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid #000;
+        }
+        #legend h3 {
+            margin-top: 0;
+        }
+        #legend img {
+            vertical-align: middle;
+            size: 1px;
+        }
+    </style>
 </head>
 <body>
 <p>Add a booking for Jake's tour <a href="/book">here</a></p>
+
+<div id="map"></div>
+<div id="legend"><h3>Legend</h3>
+</div>
+
+<!--When you create a new map instance, you specify a <div> HTML element in the page
+as a container for the map. HTML nodes are children of the JavaScript document object,
+and we obtain a reference to this element via the document.getElementById() method.
+
+This code defines a variable (named map) and assigns that variable to a new Map object.
+The function Map() is known as a constructor and its definition is shown below:
+Map(mapDiv:Node, opts?:MapOptions )
+-->
+<script>
+
+    function initMap() {
+        var usa = {lat: 39.3154396, lng: -98.095859};
+        var boston = {lat: 42.3142643, lng: -71.1107095};
+        var sanDiego = {lat: 32.8242389, lng: -117.3898465};
+        var map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 4.3,
+                center: usa
+            });
+        var bostonMarker = new google.maps.Marker({
+            position: boston,
+            map: map
+        });
+        var sanDiegoMarker = new google.maps.Marker({
+            position: sanDiego,
+            map: map
+        });
+
+
+        var iconBase = 'https://maps.google.com/mapfiles/kml/paddle/';
+        var icons = {
+            confirmed: {
+                name: 'Confirmed',
+                icon: iconBase + 'grn-blank.png'
+            },
+            haveOffer: {
+                name: 'HaveOffer',
+                icon: iconBase + 'ylw-blank.png'
+            },
+            haveAvail: {
+                name: 'HaveAvail',
+                icon: iconBase + 'pink-blank.png'
+            },
+            hold: {
+                name: 'Hold',
+                icon: iconBase + 'orange-blank.png'
+            },
+            tentative: {
+                name: 'Tentative',
+                icon: iconBase + 'red-diamond.png'
+            }
+        };
+
+        var features = [
+            {
+                position: new google.maps.LatLng(39.7642543,-104.9955373),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91539, 151.22820),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91747, 151.22912),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91910, 151.22907),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91725, 151.23011),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91872, 151.23089),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91784, 151.23094),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91682, 151.23149),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91790, 151.23463),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91666, 151.23468),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.916988, 151.233640),
+                type: 'haveAvail'
+            }, {
+                position: new google.maps.LatLng(-33.91662347903106, 151.22879464019775),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.916365282092855, 151.22937399734496),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.91665018901448, 151.2282474695587),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.919543720969806, 151.23112279762267),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.91608037421864, 151.23288232673644),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.91851096391805, 151.2344058214569),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.91818154739766, 151.2346203981781),
+                type: 'confirmed'
+            }, {
+                position: new google.maps.LatLng(-33.91727341958453, 151.23348314155578),
+                type: 'haveOffer'
+            }
+        ];
+
+        // Create markers.
+        features.forEach(function (feature) {
+            var marker = new google.maps.Marker({
+                position: feature.position,
+                icon: icons[feature.type].icon,
+                map: map
+            });
+        });
+
+        var legend = document.getElementById('legend');
+        for (var key in icons) {
+            var type = icons[key];
+            var name = type.name;
+            var icon = type.icon;
+            var div = document.createElement('div');
+            div.innerHTML = '<img src="' + icon + '"> ' + name;
+            legend.appendChild(div);
+        }
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+
+    }
+</script>
+
+<!--The URL contained in the script tag is the location of a JavaScript file that loads all of the symbols
+and definitions you need for using the Maps JavaScript API. This script tag is required.
+
+The async attribute lets the browser render the rest of your website while the Maps JavaScript
+API loads. When the API is ready, it will call the function specified using the callback parameter.
+
+The key parameter contains your application's API key.-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaYD9fWyyxTXPTyKxKxFprfIZgsVrKslo&callback=initMap"
+        async defer></script>
 </body>
 </html>
