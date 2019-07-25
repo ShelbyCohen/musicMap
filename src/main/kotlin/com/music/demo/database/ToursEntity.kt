@@ -7,11 +7,6 @@ import javax.persistence.*
 @Table(name = "tours")
 data class ToursEntity(
 
-        @Id
-        @Column(name = "tourId")
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val tourId: Int = 0,
-
         @Column(name = "artist")
         val artist: String = "",
 
@@ -36,6 +31,11 @@ data class ToursEntity(
                 cascade = [CascadeType.PERSIST]
         )
         private val bookings: Collection<BookingsEntity>? = null
-)
+) {
+        @Id
+        @Column(name = "id")
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        val id: Int? = 0
+}
 
 

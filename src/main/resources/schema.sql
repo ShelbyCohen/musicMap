@@ -1,12 +1,12 @@
 
 CREATE TABLE IF NOT EXISTS `tours` (
-  `tourId` INTEGER NOT NULL AUTO_INCREMENT,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `artist` VARCHAR(255) NOT NULL,
   `manager` VARCHAR(255) NOT NULL,
   `agent` VARCHAR(255) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  PRIMARY KEY (`tourId`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE IF NOT EXISTS `bookings` (
@@ -20,5 +20,5 @@ CREATE TABLE IF NOT EXISTS `bookings` (
   `status` varchar(255) DEFAULT 'TENTATIVE',
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `FKbookings_tourId` FOREIGN KEY (`tourId`) REFERENCES `tours` (`tourId`)
+  CONSTRAINT `FKbookings_tourId` FOREIGN KEY (`tourId`) REFERENCES `tours` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;

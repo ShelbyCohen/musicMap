@@ -1,6 +1,7 @@
 package com.music.demo.rest.resources
 
 import com.music.demo.database.BookingsEntity
+import com.music.demo.database.ToursEntity
 import com.music.demo.rest.services.BookingService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
@@ -25,7 +26,15 @@ class BookingController(@Autowired private val bookingService: BookingService) {
                 timeOnStage = "30",
                 date = Calendar.getInstance().time
         )
-        return bookingService.addBooking(newBooking)
+        val toursEntity = ToursEntity(
+                artist = "Test",
+                manager = "",
+                agent = "",
+                startDate = Calendar.getInstance().time,
+                endDate = Calendar.getInstance().time
+        )
+
+        return bookingService.addTour(toursEntity)
     }
 
 }

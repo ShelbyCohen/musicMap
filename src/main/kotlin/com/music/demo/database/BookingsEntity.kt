@@ -8,11 +8,6 @@ import javax.persistence.*
 @Table(name = "bookings")
 class BookingsEntity(
 
-        @Id
-        @Column(name = "id")
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        var id: Int? = null,
-
         @Column(name = "tourId")
         val tourId: Int = 0,
 
@@ -49,5 +44,10 @@ class BookingsEntity(
                 updatable = false
         )
         private var tourForBooking: ToursEntity? = null
-)
+) {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Int? = 0
+}
 
